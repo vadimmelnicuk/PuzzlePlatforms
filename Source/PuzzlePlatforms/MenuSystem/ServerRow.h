@@ -14,14 +14,22 @@ class PUZZLEPLATFORMS_API UServerRow : public UUserWidget
 {
 	GENERATED_BODY()
 public:
-    void Setup(class UMainMenu *InParent, uint32 InIndex);
-
     UPROPERTY(meta = (BindWidget))
     class UTextBlock *ServerName;
 
     UPROPERTY(meta = (BindWidget))
-    class UTextBlock *Owner;
+    class UTextBlock *CurrentPlayers;
 
+    UPROPERTY(meta = (BindWidget))
+    class UTextBlock *MaxPlayers;
+
+    UPROPERTY(meta = (BindWidget))
+    class UTextBlock *HostUsername;
+
+    UPROPERTY(BlueprintReadOnly)
+    bool Selected = false;
+
+    void Setup(class UMainMenu *InParent, uint32 InIndex);
 private:
     uint32 Index;
 

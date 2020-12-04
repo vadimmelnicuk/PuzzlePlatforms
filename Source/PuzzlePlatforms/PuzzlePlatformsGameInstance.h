@@ -20,6 +20,7 @@ class PUZZLEPLATFORMS_API UPuzzlePlatformsGameInstance : public UGameInstance, p
 public:
     UPuzzlePlatformsGameInstance(const FObjectInitializer &ObjectInitializer);
     virtual void Init() override;
+    void StartSession();
 
     UFUNCTION(BlueprintCallable)
     void LoadMenu();
@@ -28,13 +29,13 @@ public:
     void InGameLoadMenu();
 
     UFUNCTION(Exec)
-    void Host() override;
+    void Host(FString ServerName) override;
 
     UFUNCTION(Exec)
-    void Join(uint32 Index) override;
+    void Join(uint32 Index, FString ServerName) override;
 
     UFUNCTION(Exec)
-    void End() override;
+    void End() override; 
 
     UFUNCTION(Exec)
     void Destroy() override;
@@ -53,7 +54,7 @@ private:
     class IOnlineSubsystem *Subsystem;
     IOnlineSessionPtr SessionInterface;
     TSharedPtr<class FOnlineSessionSearch> SessionSearch;
-    const FName CurrentSessionName = TEXT("VM Test");
+    FString HostServerName;
 
     void CreateSession();
     void OnCreateSessionComplete(FName SessionName, bool Success);
